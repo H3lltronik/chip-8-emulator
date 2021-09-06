@@ -44,6 +44,7 @@ class Chip8 {
         this.cpu.restart();
         await this.cpu.loadRom(room);
 
+        console.log("Loop execution started")
         this.step();
     }
 

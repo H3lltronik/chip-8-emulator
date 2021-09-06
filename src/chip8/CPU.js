@@ -15,6 +15,7 @@ class CPU {
     renderer = null;
     keyboard = null;
     speed = 10;
+    loading = false;
 
     constructor (renderer, keyboard) {
         this.renderer = renderer
@@ -41,6 +42,7 @@ class CPU {
 
     async loadRom (room) {
         console.log("Loading room " + room + "...")
+        this.loading = true;
         const program = await fetch(room)
         .then(res => res.arrayBuffer())
         .then(buffer => {
@@ -49,6 +51,7 @@ class CPU {
         }).catch(error => {
             console.error("Error while loading rom " + room + " Error:" + error);
         });
+        this.loading = false;
         
         if (!program) {
             console.error("No rom loaded");
@@ -90,6 +93,7 @@ class CPU {
     }
 
     cycle () {
+        if (this.loading) return;
         for (let i = 0; i < this.speed; i++) {
             if (!this.paused) {
                 let opcode = (this.memory[this.pc] << 8) | this.memory[this.pc + 1];
