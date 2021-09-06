@@ -14,9 +14,9 @@
 
   <div class="footer">
     <div class="">
-      <span>Made by <a href="https://www.linkedin.com/notifications/">H3lltronik</a></span>
+      <span>Made by <a target="_blank" href="https://www.linkedin.com/notifications/">H3lltronik</a></span>
       <span>|||</span>
-      <a href="https://github.com/H3lltronik/chip-8-emulator">Source Code</a>
+      <a target="_blank" href="https://github.com/H3lltronik/chip-8-emulator">Source Code</a>
     </div>
   </div>
   
