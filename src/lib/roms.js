@@ -19,4 +19,20 @@ export default [
         name: "Tetris",
         url: "/rooms/games/Tetris [Fran Dachille, 1991].ch8",
     },
+    {
+        name: "Space Invaders",
+        url: "/rooms/games/Space Invaders [David Winter] (alt).ch8",
+    },
+    {
+        name: "Brick",
+        url: "/rooms/games/Brick (Brix hack, 1990).ch8",
+    },
+    {
+        name: "Brix 2",
+        url: "/rooms/games/Brix [Andreas Gustafsson, 1990].ch8",
+    },
+    {
+        name: "Coin Flipping",
+        url: "/rooms/games/Coin Flipping [Carmelo Cortez, 1978].ch8",
+    },
 ]
