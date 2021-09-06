@@ -25,6 +25,7 @@ class CPU {
     }
 
     restart () {
+        console.log("Restarting...")
         this.registers = new Uint8Array(16);
         this.memory = new Uint8Array(4096);
         this.stack = new Array(16);
@@ -39,22 +40,32 @@ class CPU {
     }
 
     async loadRom (room) {
+        console.log("Loading room " + room + "...")
         const program = await fetch(room)
         .then(res => res.arrayBuffer())
         .then(buffer => {
+            console.log("Rom " + room + " loaded")
             return new Uint8Array(buffer)
+        }).catch(error => {
+            console.error("Error while loading rom " + room + " Error:" + error);
         });
         
+        if (!program) {
+            console.error("No rom loaded");
+            return
+        }
         for (let i = 0; i < program.length; i++) {
             this.memory[START_ADDRESS + i] = program[i];
         }
     }
 
     loadFonts () {
+        console.log("Loading fonts...")
         const fonts = this.getFontSet();
         for (let i = 0; i < fonts.length; i++) {
             this.memory[FONTSET_START_ADDRESS + i] = fonts[i];
         }
+        console.log("Fonts loaded...")
     }
 
     getFontSet() {
