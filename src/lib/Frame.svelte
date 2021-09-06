@@ -10,6 +10,7 @@
 <style lang="scss">
     .frame {
         max-width: 900px;
+        max-height: 70vh;
         position: relative;
         padding: 50px 50px;
         border: 5px solid white;
@@ -27,6 +28,7 @@
 
     @media (max-width: 800px) {
         .frame {
+            max-height: unset;
             height: 400px;
             padding: 0px 50px;
         }

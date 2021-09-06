@@ -22,7 +22,7 @@
     
     select { 
         appearance: none;
-        border: 0;
+        border: 1px solid white;
         outline: 0;
         font: inherit;
 

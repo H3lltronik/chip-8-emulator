@@ -131,7 +131,7 @@ class CPU {
                         break;
                     }
                     default: {
-                        console.error(`${opcode} not implemented`)
+                        // console.error(`${opcode} not implemented`)
                     }
                 }
                 break;
@@ -215,7 +215,7 @@ class CPU {
                         break;
                     }
                     default: {
-                        console.error(`${opcode} not implemented`)
+                        // console.error(`${opcode} not implemented`)
                     }
                 }
                 break;
@@ -279,7 +279,7 @@ class CPU {
                         break;
                     }
                     default: {
-                        console.error(`${opcode} not implemented`)
+                        // console.error(`${opcode} not implemented`)
                     }
                 }
                 break;
@@ -335,13 +335,13 @@ class CPU {
                         break;
                     }
                     default: {
-                        console.error(`${opcode} not implemented`)
+                        // console.error(`${opcode} not implemented`)
                     }
                 }
                 break;
             }
             default: {
-                console.error(`${opcode} not implemented`)
+                // console.error(`${opcode} not implemented`)
             }
         }
     }

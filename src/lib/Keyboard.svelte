@@ -4,12 +4,16 @@
 
     let keysCopy = [...keys];
 
-    let doKeystroke = (key) => {
-        window.dispatchEvent(new KeyboardEvent('keydown', {'code': key}));
-
-        setTimeout(() => {
-            doKeyUp(key);
-        }, 50);
+    let doKeystroke = (key, event) => {
+        
+        if (event.type == "mousedown" || event.type == "touchstart") {
+            window.dispatchEvent(new KeyboardEvent('keydown', {'code': key}));
+        } else if (event.type == "mouseup" || event.type == "touchend") {
+            setTimeout(() => {
+                doKeyUp(key);
+            }, 50);
+        }
+        
     };
 
     let doKeyUp = (key) => {
@@ -41,7 +45,12 @@
 
     <div class="grid">
         {#each keysCopy as key}
-            <button on:mousedown={() => doKeystroke(key.code)} bind:this={key.el}>{key.key}</button>
+            <button 
+                on:mousedown={e => doKeystroke(key.code, e)} 
+                on:touchend={e => doKeystroke(key.code, e)} 
+                on:touchstart={e => doKeystroke(key.code, e)} 
+                on:mouseup={e => doKeystroke(key.code, e)} 
+                bind:this={key.el}>{key.key}</button>
         {/each}
     </div>
 </div>
@@ -72,6 +81,7 @@
         border: none;
         color: white;
         cursor: pointer;
+        user-select: none;
         background-color: transparent;
         font-family: 'Press Start 2P', cursive;
     }

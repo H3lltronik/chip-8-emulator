@@ -21,7 +21,7 @@ main {
     margin-top: 100px;
     flex-direction: column;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr auto;
     grid-template-columns: 12fr 4fr;
 }
 
@@ -43,6 +43,12 @@ main {
 .button-active {
     color: black !important;
     background-color: white !important;
+}
+
+@media (max-width: 1400px) {
+    main {
+        margin-top: 20px;
+    }
 }
 
 @media (max-width: 903px) {
