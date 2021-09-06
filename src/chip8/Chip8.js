@@ -18,6 +18,8 @@ class Chip8 {
     fpsCounter = null;
     fpsCounterInterval = 2;
 
+    animationReqId = null;
+
     constructor(canvas, fpsCounter = null) {
         const keyboard = new Keyboard();
         const monitor = new Monitor(canvas);
@@ -35,11 +37,18 @@ class Chip8 {
         this.cpu.restart();
         await this.cpu.loadRom(room);
 
+        if (this.animationReqId) {
+            console.log(`Request ID ${this.animationReqId}. Canceling...`)
+            cancelAnimationFrame(this.animationReqId)
+
+        } else 
+            console.warn("No request ID to cancel")
+
         this.step();
     }
 
     step() {
-        requestAnimationFrame( () => this.step() );
+        this.animationReqId = requestAnimationFrame( () => this.step() );
 
         this.now = performance.now();
         this.elapsed = this.now - this.then;
