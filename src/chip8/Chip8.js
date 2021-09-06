@@ -9,18 +9,31 @@ class Chip8 {
     elapsed = 0;
     startTime = 0;
     fpsInterval = 0;
+    
     cpu = null;
+    actualFps = 0;
+    elapsedFps = 0;
+    nowFps = 0;
+    thenFps = 0;
+    fpsCounter = null;
+    fpsCounterInterval = 2;
 
-    constructor(canvas) {
+    constructor(canvas, fpsCounter = null) {
         const keyboard = new Keyboard();
         const monitor = new Monitor(canvas);
         this.cpu = new CPU(monitor, keyboard);
+        this.fpsCounter = fpsCounter;
+
+        this.fpsInterval = 1000 / this.fps;
     }
 
-    start () {
-        this.fpsInterval = 1000 / this.fps;
-        this.then = Date.now();
+    async start (room) {
+        this.then = this.thenFps = performance.now();
         this.startTime = this.then;
+        
+        this.fpsCounter.innerHTML = "Loading..."
+        this.cpu.restart();
+        await this.cpu.loadRom(room);
 
         this.step();
     }
@@ -28,13 +41,26 @@ class Chip8 {
     step() {
         requestAnimationFrame( () => this.step() );
 
-        this.now = Date.now();
+        this.now = performance.now();
         this.elapsed = this.now - this.then;
 
+        this.updateFps();
 
         if (this.elapsed > this.fpsInterval) {
             this.then = this.now - (this.elapsed % this.fpsInterval);
             this.cpu.cycle();
+        }
+    }
+
+    updateFps () {
+        this.nowFps = performance.now();
+        this.elapsedFps = this.nowFps - this.thenFps;
+        
+        if (this.fpsCounter && this.elapsedFps > this.fpsCounterInterval * 1000) {
+            this.thenFps = this.nowFps;
+
+            this.actualFps = 1 / (this.elapsed / 1000);
+            this.fpsCounter.innerHTML = Math.floor(this.actualFps);
         }
     }
 }

@@ -19,6 +19,7 @@
     .title {
         padding: 0px 50px;
         position: absolute;
+        white-space: nowrap;
         bottom: 100%; left: 50%;
         transform: translate(-50%, 100%);
         background-color: var(--background);
@@ -39,7 +40,6 @@
         .title {
             font-size: 20px;
             padding: 0px 20px;
-            white-space: nowrap;
         }
     }
 </style>

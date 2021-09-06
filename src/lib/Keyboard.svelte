@@ -36,7 +36,7 @@
     });
 </script>
 
-<div class="keyboard">
+<div class="keyboard flex-center">
     <h2>Keyboard</h2>
 
     <div class="grid">
@@ -50,13 +50,14 @@
     .keyboard {
         margin-top: 50px;
         text-align: center;
+        flex-direction: column;
     }
 
     .grid {
         width: 300px;
         height: 300px;
         display: grid;
-        row-gap: 15px;
+        row-gap: 10px;
         column-gap: 10px;
         grid-template-rows: 1fr 1fr 1fr 1fr; 
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -73,5 +74,15 @@
         cursor: pointer;
         background-color: transparent;
         font-family: 'Press Start 2P', cursive;
+    }
+
+    @media (max-width: 400px) {
+        .keyboard {
+            margin-top: 10px;
+        }
+        .grid {
+            width: 200px;
+            height: 200px;
+        }
     }
 </style>

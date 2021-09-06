@@ -29,7 +29,6 @@ class Keyboard {
     }
 
     onKeyDown(val) {
-        console.log("wa", val)
         let key = this.KEYMAP[val];
         this.keysPressed[key] = true;
     

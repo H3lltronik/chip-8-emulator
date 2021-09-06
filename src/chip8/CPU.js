@@ -7,7 +7,6 @@ const FONTSET_START_ADDRESS = 0x50;
 class CPU {
     registers = new Uint8Array(16);
     memory = new Uint8Array(4096);
-    // stack = new Uint8Array(16);
     stack = new Array(16);
     index = 0;
     pc = 0;
@@ -22,13 +21,25 @@ class CPU {
         this.keyboard = keyboard
         this.pc = START_ADDRESS;
 
-        this.loadRom();
         this.loadFonts();
     }
 
-    async loadRom () {
-        // const program = await fetch("/IBM Logo.ch8")
-        const program = await fetch("/rooms/games/Airplane.ch8")
+    restart () {
+        this.registers = new Uint8Array(16);
+        this.memory = new Uint8Array(4096);
+        this.stack = new Array(16);
+        this.index = 0;
+        this.pc = START_ADDRESS;
+        this.delayTimer = 0;
+        this.soundTimer = 0;
+        this.speed = 10;
+        this.renderer.clear();
+
+        this.loadFonts();
+    }
+
+    async loadRom (room) {
+        const program = await fetch(room)
         .then(res => res.arrayBuffer())
         .then(buffer => {
             return new Uint8Array(buffer)
@@ -67,7 +78,7 @@ class CPU {
         ]
     }
 
-    cycle () {    
+    cycle () {
         for (let i = 0; i < this.speed; i++) {
             if (!this.paused) {
                 let opcode = (this.memory[this.pc] << 8) | this.memory[this.pc + 1];
@@ -105,7 +116,7 @@ class CPU {
                         break;
                     }
                     default: {
-                        console.error(`${opcode} not implemented`)
+                        // console.error(`${opcode} not implemented`)
                     }
                 }
                 break;
@@ -189,7 +200,7 @@ class CPU {
                         break;
                     }
                     default: {
-                        console.error(`${opcode} not implemented`)
+                        // console.error(`${opcode} not implemented`)
                     }
                 }
                 break;
@@ -253,7 +264,7 @@ class CPU {
                         break;
                     }
                     default: {
-                        console.error(`${opcode} not implemented`)
+                        // console.error(`${opcode} not implemented`)
                     }
                 }
                 break;
@@ -309,13 +320,13 @@ class CPU {
                         break;
                     }
                     default: {
-                        console.error(`${opcode} not implemented`)
+                        // console.error(`${opcode} not implemented`)
                     }
                 }
                 break;
             }
             default: {
-                console.error(`${opcode} not implemented`)
+                // console.error(`${opcode} not implemented`)
             }
         }
     }
