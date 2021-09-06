@@ -30,19 +30,19 @@ class Chip8 {
     }
 
     async start (room) {
-        this.then = this.thenFps = performance.now();
-        this.startTime = this.then;
-        
-        this.fpsCounter.innerHTML = "Loading..."
-        this.cpu.restart();
-        await this.cpu.loadRom(room);
-
         if (this.animationReqId) {
             console.log(`Request ID ${this.animationReqId}. Canceling...`)
             cancelAnimationFrame(this.animationReqId)
 
         } else 
             console.warn("No request ID to cancel")
+
+        this.then = this.thenFps = performance.now();
+        this.startTime = this.then;
+        
+        this.fpsCounter.innerHTML = "Loading..."
+        this.cpu.restart();
+        await this.cpu.loadRom(room);
 
         this.step();
     }
